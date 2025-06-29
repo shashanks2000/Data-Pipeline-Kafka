@@ -2,7 +2,7 @@ import toml
 import os
 
 class Config:
-    def __init__(self, config_file= 'config.toml'):
+    def __init__(self, config_file= r'/Users/shashankachar/Desktop/Python-Projects/Data-Pipeline/config.toml'):
         current_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
         config_path = os.path.join(current_dir, config_file)
 

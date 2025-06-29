@@ -9,7 +9,7 @@ class ConsumerKafka:
             bootstrap_servers= config.kafka_config['bootstrap_servers'],
             value_deserializer= lambda x: json.loads(x.decode('utf-8')),
             auto_offset_reset= config.kafka_config['auto_offset_reset'],
-            group_id= config.kafka_config['group_id']
+            group_id= config.kafka_config['consumer_group']
         )
 
     def _consume_data(self):

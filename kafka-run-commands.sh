@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Start Zookeeper (Run in a separate terminal)
-zookeeper-server-start /opt/homebrew/etc/kafka/zookeeper.properties
+brew services start zookeeper
 
 # Start Kafka Server (Run in a separate terminal)
-kafka-server-start /opt/homebrew/etc/kafka/server.properties
+brew services start kafka
 
 # Create a topic
 kafka-topics --create --topic api-data-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1

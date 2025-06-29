@@ -4,7 +4,7 @@ from typing import Dict, Any
 from src.pipeline.config.config import config
 
 class APIClient:
-    def __init__(self, endpoint:str):
+    def __init__(self):
         self.endpoint = config.api_config['base_url']
 
     def _get_data(self) -> Any :
