@@ -1,0 +1,22 @@
+kafka-api-project/
+│
+├── src/
+│   ├── main/
+│   │   ├── python/
+│   │   │   ├── config/
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── config.py
+│   │   │   ├── producer/
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── api_producer.py
+│   │   │   ├── consumer/
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── data_consumer.py
+│   │   │   └── utils/
+│   │   │       ├── __init__.py
+│   │   │       └── api_client.py
+│   │   └── resources/
+│   │       └── application.properties
+│
+├── requirements.txt
+└── README.md

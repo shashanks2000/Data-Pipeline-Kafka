@@ -1,0 +1,12 @@
+[kafka]
+bootstrap_servers = "localhost:9092"
+topic_name = "api-data-topic"
+consumer_group = "api-data-consumer-group"
+auto_offset_reset = "earliest"
+
+[api]
+base_url = "url"
+api_key = "api_key"
+
+[settings]
+fetch_interval = 60  # seconds
