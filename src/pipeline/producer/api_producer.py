@@ -12,7 +12,7 @@ class ProducerKafka:
         )
 
         self.api_client = APIClient()
-        self.topic = config.kafka_config['topic']
+        self.topic = config.kafka_config['topic_name']
         self.fetch_interval = config.settings['interval']
 
     def _produce_data(self):
