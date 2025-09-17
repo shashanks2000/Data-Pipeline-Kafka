@@ -8,7 +8,7 @@ class ProducerKafka:
     def __init__(self):
         self.producer = KafkaProducer(
             bootstrap_servers= config.kafka_config['bootstrap_servers'],
-            value_serializer= lambda k : json.dumps(k).encode('utf-8')
+            value_serializer= lambda k : k.encode('utf-8')
         )
 
         self.api_client = APIClient()
@@ -22,7 +22,7 @@ class ProducerKafka:
 
         while flag:
 
-            data = self.api_client._get_data()
+            data = self.api_client._get_data(startid=counter)
 
             if data:
                 self.producer.send(self.topic, data)
@@ -35,8 +35,10 @@ class ProducerKafka:
                 print("No data received for 5 consecutive attempts. Stopping production.")
                 flag = False
                 break
-
+            
+            counter += 1
             time.sleep(self.fetch_interval)
+
 
     def _close(self):
         self.producer.close()

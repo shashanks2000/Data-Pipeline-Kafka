@@ -4,18 +4,17 @@ import threading
 import signal
 import sys
 
-# Global flag for graceful shutdown
-running = True
+# Use an Event for thread-safe signaling
+shutdown_event = threading.Event()
 
 def signal_handler(signum, frame):
-    global running
     print("Received shutdown signal. Stopping...")
-    running = False
+    shutdown_event.set()
 
 def run_producer():
     producer = ProducerKafka()
     try:
-        while running:
+        while not shutdown_event.is_set():
             producer._produce_data()
     finally:
         producer._close()
@@ -23,7 +22,7 @@ def run_producer():
 def run_consumer():
     consumer = ConsumerKafka()
     try:
-        while running:
+        while not shutdown_event.is_set():
             consumer._consume_data()
     except KeyboardInterrupt:
         pass
@@ -41,7 +40,13 @@ def main():
     producer_thread.start()
     consumer_thread.start()
 
-    # Wait for both threads to complete
+    # Wait for shutdown_event to be set
+    try:
+        while not shutdown_event.is_set():
+            shutdown_event.wait(0.5)
+    except KeyboardInterrupt:
+        shutdown_event.set()
+
     producer_thread.join()
     consumer_thread.join()
 

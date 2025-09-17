@@ -1,3 +1,6 @@
+# for tmux refer below document
+# https://jeongwhanchoi.medium.com/install-tmux-on-osx-and-basics-commands-for-beginners-be22520fd95e
+
 #!/bin/bash
 
 # Start Zookeeper (Run in a separate terminal)
