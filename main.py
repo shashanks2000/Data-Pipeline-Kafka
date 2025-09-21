@@ -14,18 +14,17 @@ def signal_handler(signum, frame):
 def run_producer():
     producer = ProducerKafka()
     try:
-        while not shutdown_event.is_set():
-            producer._produce_data()
+        producer._produce_data(shutdown_event)  # Pass the event
     finally:
         producer._close()
 
 def run_consumer():
     consumer = ConsumerKafka()
     try:
-        while not shutdown_event.is_set():
-            consumer._consume_data()
-    except KeyboardInterrupt:
-        pass
+        consumer._consume_data(shutdown_event)  # Pass the event
+    finally:
+        consumer._close()  # Add this if you have a ._close() method
+
 
 def main():
     # Set up signal handling

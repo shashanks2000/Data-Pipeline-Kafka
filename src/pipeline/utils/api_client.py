@@ -5,22 +5,25 @@ from src.pipeline.config.config import config
 
 class APIClient:
     def __init__(self):
-        self.endpoint = config.api_config['base_url']
+        self.endpoint = config.api_config.base_url
 
     def _get_data(self, startid: int) -> Any:
         try:
             base_url = self.endpoint  # Should be just: "https://export.arxiv.org/api/query"
 
             # Use a dict to pass query parameters
+            search_query = "all:Physics"
             params = {
-                "search_query": "all:Physics",
+                "search_query": search_query,
                 "start": startid,
-                "max_results": 1
+                "max_results": 1,
+                "sortBy":"lastUpdatedDate",
+                "sortOrder":"ascending"
             }
 
-            response = requests.get(base_url, params=params)
-            response.raise_for_status()
-            data = response.content
+            with requests.get(base_url, params=params) as response:
+                response.raise_for_status()
+                data = response.content
             return data.decode('utf-8')
         except RequestException as e:
             print(f"An error occurred while fetching data: {e}")
