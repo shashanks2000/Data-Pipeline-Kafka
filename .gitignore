@@ -1,4 +1,35 @@
+# Environment variables file
+.env
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment folders (adjust if your env folder is named differently)
 .venv/
-**__pycache__
+env/
+venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Docker override files (optional)
+docker-compose.override.yml
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+
+# Ignore any IDE/editor config files (optional, but recommended)
+.vscode/
+.idea/
+
+# Mac system files (if on Mac)
+.DS_Store
+
+# ipy notebook
 rough.ipynb
-config.toml

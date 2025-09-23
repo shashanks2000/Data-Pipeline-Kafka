@@ -1,22 +1,30 @@
-kafka-api-project/
-│
-├── src/
-│   ├── main/
-│   │   ├── python/
-│   │   │   ├── config/
-│   │   │   │   ├── __init__.py
-│   │   │   │   └── config.py
-│   │   │   ├── producer/
-│   │   │   │   ├── __init__.py
-│   │   │   │   └── api_producer.py
-│   │   │   ├── consumer/
-│   │   │   │   ├── __init__.py
-│   │   │   │   └── data_consumer.py
-│   │   │   └── utils/
-│   │   │       ├── __init__.py
-│   │   │       └── api_client.py
-│   │   └── resources/
-│   │       └── application.properties
-│
+Data-Pipeline/
+├── .dockerignore
+├── .env
+├── .gitignore
+├── Dockerfile
+├── README.md
+├── docker-compose.yml
+├── kafka-run-commands.sh
+├── main.py
 ├── requirements.txt
-└── README.md
+├── rough.ipynb
+├── src/
+│   ├── pipeline/
+│   │   ├── config/
+│   │   │   ├── __init__.py
+│   │   │   ├── config.py
+│   │   ├── consumer/
+│   │   │   ├── __init__.py
+│   │   │   ├── data_consumer.py
+│   │   ├── producer/
+│   │   │   ├── __init__.py
+│   │   │   ├── api_producer.py
+│   │   ├── utils/
+│   │   │   ├── __init__.py
+│   │   │   ├── api_client.py
+│   │   │   ├── arXiv_schema.xsd
+│   │   │   ├── s3_dump.py
+│   ├── resources/
+│   │   ├── application.properties
+├── structure.txt

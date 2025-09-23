@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
+    xmlns:arxiv="http://arxiv.org/schemas/atom"
+    targetNamespace="http://www.w3.org/2005/Atom"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+  <!-- Root feed element -->
+  <xs:element name="feed">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="link" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="href" type="xs:anyURI" use="required"/>
+            <xs:attribute name="rel" type="xs:string" use="optional"/>
+            <xs:attribute name="type" type="xs:string" use="optional"/>
+            <xs:attribute name="title" type="xs:string" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+
+        <xs:element name="title" type="xs:string"/>
+        <xs:element name="id" type="xs:anyURI"/>
+        <xs:element name="updated" type="xs:dateTime"/>
+
+        <!-- OpenSearch elements -->
+        <xs:element ref="opensearch:totalResults"/>
+        <xs:element ref="opensearch:startIndex"/>
+        <xs:element ref="opensearch:itemsPerPage"/>
+
+        <!-- Entry (can appear multiple times) -->
+        <xs:element name="entry" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" type="xs:anyURI"/>
+              <xs:element name="updated" type="xs:dateTime"/>
+              <xs:element name="published" type="xs:dateTime"/>
+              <xs:element name="title" type="xs:string"/>
+              <xs:element name="summary" type="xs:string"/>
+              <xs:element name="author">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+
+              <!-- arXiv DOI -->
+              <xs:element ref="arxiv:doi" minOccurs="0"/>
+              <xs:element name="link" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="href" type="xs:anyURI" use="required"/>
+                  <xs:attribute name="rel" type="xs:string" use="optional"/>
+                  <xs:attribute name="type" type="xs:string" use="optional"/>
+                  <xs:attribute name="title" type="xs:string" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+
+              <!-- arXiv comment -->
+              <xs:element ref="arxiv:comment" minOccurs="0"/>
+
+              <!-- arXiv primary category -->
+              <xs:element ref="arxiv:primary_category" minOccurs="0"/>
+              
+              <!-- Additional categories -->
+              <xs:element name="category" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="term" type="xs:string" use="required"/>
+                  <xs:attribute name="scheme" type="xs:anyURI" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- OpenSearch Elements -->
+  <xs:element name="totalResults" xmlns="http://a9.com/-/spec/opensearch/1.1/" type="xs:integer"/>
+  <xs:element name="startIndex" xmlns="http://a9.com/-/spec/opensearch/1.1/" type="xs:integer"/>
+  <xs:element name="itemsPerPage" xmlns="http://a9.com/-/spec/opensearch/1.1/" type="xs:integer"/>
+
+  <!-- arXiv-specific Elements -->
+  <xs:element name="doi" xmlns="http://arxiv.org/schemas/atom" type="xs:string"/>
+  <xs:element name="comment" xmlns="http://arxiv.org/schemas/atom" type="xs:string"/>
+  <xs:element name="primary_category" xmlns="http://arxiv.org/schemas/atom">
+    <xs:complexType>
+      <xs:attribute name="term" type="xs:string" use="required"/>
+      <xs:attribute name="scheme" type="xs:anyURI" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
