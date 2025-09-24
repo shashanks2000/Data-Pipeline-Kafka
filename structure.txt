@@ -1,6 +1,5 @@
 Data-Pipeline/
 ├── .dockerignore
-├── .env
 ├── .gitignore
 ├── Dockerfile
 ├── README.md
@@ -8,7 +7,6 @@ Data-Pipeline/
 ├── kafka-run-commands.sh
 ├── main.py
 ├── requirements.txt
-├── rough.ipynb
 ├── src/
 │   ├── pipeline/
 │   │   ├── config/

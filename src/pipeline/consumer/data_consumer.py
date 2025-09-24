@@ -29,7 +29,7 @@ class ConsumerKafka:
         batch_records = []
         counter = 1
         batch_start_time = datetime.now(timezone.utc)
-        BATCH_INTERVAL = timedelta(minutes=1)
+        BATCH_INTERVAL = timedelta(hours=1)
 
         try:
             while not shutdown_event.is_set():
