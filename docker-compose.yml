@@ -11,6 +11,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks: [kafka-net]
 
   kafka:
     image: confluentinc/cp-kafka:7.4.0
@@ -22,14 +23,16 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      # internal listener (for containers on kafka-net)
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     healthcheck:
       test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
       interval: 10s
       timeout: 10s
       retries: 5
+    networks: [kafka-net]
 
   kafka-init:
     image: confluentinc/cp-kafka:7.4.0
@@ -45,6 +48,7 @@ services:
         echo "Creating topic api-data-topic..."
         kafka-topics --bootstrap-server kafka:9092 --topic api-data-topic --create --partitions 5 --replication-factor 1 || true
     restart: "no"
+    networks: [kafka-net]
 
   app:
     build: .
@@ -61,8 +65,9 @@ services:
       BASE_URL: ${BASE_URL}
       API_KEY: ${API_KEY}
       FETCH_INTERVAL: "2"
-      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
-      AWS_SECRET_KEY: ${AWS_SECRET_KEY}
-      AWS_REGION: ${AWS_REGION}
-      AWS_BUCKET: ${AWS_BUCKET}
     command: ["python", "main.py"]
+    networks: [kafka-net]
+
+networks:
+  kafka-net:
+    external: true

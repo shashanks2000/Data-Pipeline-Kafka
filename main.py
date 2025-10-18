@@ -1,5 +1,4 @@
 from src.pipeline.producer.api_producer import ProducerKafka
-from src.pipeline.consumer.data_consumer import ConsumerKafka
 import threading
 import signal
 import sys
@@ -18,14 +17,6 @@ def run_producer():
     finally:
         producer._close()
 
-def run_consumer():
-    consumer = ConsumerKafka()
-    try:
-        consumer._consume_data(shutdown_event)  # Pass the event
-    finally:
-        consumer._close()  # Add this if you have a ._close() method
-
-
 def main():
     # Set up signal handling
     signal.signal(signal.SIGINT, signal_handler)
@@ -33,11 +24,9 @@ def main():
 
     # Create threads for producer and consumer
     producer_thread = threading.Thread(target=run_producer)
-    # consumer_thread = threading.Thread(target=run_consumer)
 
-    # Start both threads
+    # Start the threads
     producer_thread.start()
-    # consumer_thread.start()
 
     # Wait for shutdown_event to be set
     try:
@@ -47,7 +36,6 @@ def main():
         shutdown_event.set()
 
     producer_thread.join()
-    # consumer_thread.join()
 
 if __name__ == "__main__":
     main()
