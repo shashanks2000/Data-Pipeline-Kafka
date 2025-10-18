@@ -33,3 +33,6 @@ docker-compose.override.yml
 
 # ipy notebook
 rough.ipynb
+
+# bookmark backup
+bookmark_temp.json

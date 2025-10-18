@@ -43,7 +43,7 @@ services:
         echo "Waiting for Kafka to be ready..."
         cub kafka-ready -b kafka:9092 1 20
         echo "Creating topic api-data-topic..."
-        kafka-topics --bootstrap-server kafka:9092 --topic api-data-topic --create --partitions 1 --replication-factor 1 || true
+        kafka-topics --bootstrap-server kafka:9092 --topic api-data-topic --create --partitions 5 --replication-factor 1 || true
     restart: "no"
 
   app:

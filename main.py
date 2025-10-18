@@ -33,11 +33,11 @@ def main():
 
     # Create threads for producer and consumer
     producer_thread = threading.Thread(target=run_producer)
-    consumer_thread = threading.Thread(target=run_consumer)
+    # consumer_thread = threading.Thread(target=run_consumer)
 
     # Start both threads
     producer_thread.start()
-    consumer_thread.start()
+    # consumer_thread.start()
 
     # Wait for shutdown_event to be set
     try:
@@ -47,7 +47,7 @@ def main():
         shutdown_event.set()
 
     producer_thread.join()
-    consumer_thread.join()
+    # consumer_thread.join()
 
 if __name__ == "__main__":
     main()
