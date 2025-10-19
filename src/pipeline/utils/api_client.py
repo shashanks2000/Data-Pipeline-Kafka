@@ -16,7 +16,7 @@ class APIClient:
             params = {
                 "search_query": search_query,
                 "start": startid,
-                "max_results": 1,
+                "max_results": 100,
                 "sortBy":"lastUpdatedDate",
                 "sortOrder":"ascending"
             }
