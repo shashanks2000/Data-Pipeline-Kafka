@@ -3,6 +3,8 @@
 
 #!/bin/bash
 
+docker network create kafka-net
+
 # Start Zookeeper (Run in a separate terminal)
 brew services start zookeeper
 

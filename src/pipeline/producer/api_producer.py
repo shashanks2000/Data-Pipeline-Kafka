@@ -81,7 +81,7 @@ class ProducerKafka:
             else:
                 flag = False
 
-            counter += 1
+            counter += 100
             time.sleep(self.fetch_interval)
 
         self.bookmark_store.set("counter", counter)
